@@ -2,34 +2,13 @@ import React, { Component } from 'react';
 import Pokemon from './Pokemon';
 
 export default class PokemonList extends Component {
-  state = {
-    species: [],
-    fetched: false,
-    loading: false
-  };
-
-  componentWillMount() {
-    this.setState({
-      loading: true
-    });
-    fetch('http://pokeapi.co/api/v2/pokemon?limit=151')
-      .then(res => res.json())
-      .then(response => {
-        this.setState({
-          species: response.results,
-          loading: true,
-          fetched: true
-        });
-      });
-  }
-
   render() {
-    const { fetched, loading, species } = this.state;
+    const { fetched, loading } = this.props.initialData;
     let content;
     if (fetched) {
       content = (
         <div className='pokemon--species--list'>
-          {species.map((pokemon, index) => (
+          {this.props.filteredSpecies.map((pokemon, index) => (
             <Pokemon
               key={index}
               id={index + 1}

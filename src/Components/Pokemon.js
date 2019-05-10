@@ -10,7 +10,6 @@ export default class Pokemon extends Component {
     fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
       .then(res => res.json())
       .then(res => {
-        console.log(res.sprites.front_default);
         this.setState({
           img: res.sprites.front_default
         });
